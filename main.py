@@ -1,25 +1,13 @@
-import pymongo
+from adult_income.exception import IncomeException
+from adult_income.utils import get_collection_as_dataframe
 
-# Provide the mongodb localhost url to connect python to mongodb.
-client = pymongo.MongoClient("mongodb://localhost:27017/neurolabDB")
 
-# Database Name
-dataBase = client["neurolabDB"]
+if __name__=="__main__":
+     try:
+          adult_ls=get_collection_as_dataframe(keyspaceName='adult',tableName='censusincome')
+          print(f"The Shape of the Dataaframe is {adult_ls.shape}")
+          print(adult_ls.head(1))
+     except Exception as e:
+          print(e)
 
-# Collection  Name
-collection = dataBase['Products']
 
-# Sample data
-d = {'companyName': 'iNeuron',
-     'product': 'Affordable AI',
-     'courseOffered': 'Machine Learning with Deployment'}
-
-# Insert above records in the collection
-rec = collection.insert_one(d)
-
-# Lets Verify all the record at once present in the record with all the fields
-all_record = collection.find()
-
-# Printing all records present in the collection
-for idx, record in enumerate(all_record):
-     print(f"{idx}: {record}")
