@@ -1,10 +1,11 @@
 import pandas as pd
 from adult_income.logger import logging
 from adult_income.exception import IncomeException
-from adult_income.config import session
+from adult_income.config import mongo_client
 import os,sys
 
-def get_collection_as_dataframe(keyspaceName:str,tableName:str)->pd.DataFrame:
+
+def get_collection_as_dataframe(database_name:str,collection_name:str)->pd.DataFrame:
     """
     Description: This function return collection as dataframe
     =========================================================
@@ -15,8 +16,13 @@ def get_collection_as_dataframe(keyspaceName:str,tableName:str)->pd.DataFrame:
     return Pandas dataframe of a collection
     """
     try:
-        row = session.execute(f"select * from {keyspaceName}.{tableName}")
-        df=pd.DataFrame([i for i in row])
+        logging.info(f"Reading data from database: {database_name} and collection: {collection_name}")
+        df = pd.DataFrame(list(mongo_client[database_name][collection_name].find()))
+        logging.info(f"Found columns: {df.columns}")
+        if "_id" in df.columns:
+            logging.info(f"Dropping column: _id ")
+            df = df.drop("_id",axis=1)
+        logging.info(f"Row and columns in df: {df.shape}")
         return df
     except Exception as e:
         raise IncomeException(e, sys)

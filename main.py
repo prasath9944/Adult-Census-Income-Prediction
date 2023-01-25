@@ -1,13 +1,18 @@
+from adult_income.logger import logging
 from adult_income.exception import IncomeException
 from adult_income.utils import get_collection_as_dataframe
+import sys,os
+from adult_income.entity import config_entity
+from adult_income.components.data_ingestion import DataIngestion
+
 
 
 if __name__=="__main__":
      try:
-          adult_ls=get_collection_as_dataframe(keyspaceName='adult',tableName='censusincome')
-          print(f"The Shape of the Dataaframe is {adult_ls.shape}")
-          print(adult_ls.head(1))
+          training_pipeline_config = config_entity.TrainingPipelineConfig()
+          data_ingestion_config  = config_entity.DataIngestionConfig(training_pipeline_config=training_pipeline_config)
+          print(data_ingestion_config.to_dict())
+          data_ingestion = DataIngestion(data_ingestion_config=data_ingestion_config)
+          print(data_ingestion.initiate_data_ingestion())
      except Exception as e:
           print(e)
-
-
