@@ -11,5 +11,13 @@ adult_income/exception.py
 adult_income/logger.py
 adult_income/utils.py
 adult_income/components/__init__.py
+adult_income/components/data_ingestion.py
+adult_income/components/data_transformation.py
+adult_income/components/data_validation.py
+adult_income/components/model_evaluation.py
+adult_income/components/model_pusher.py
+adult_income/components/model_trainer.py
 adult_income/entity/__init__.py
+adult_income/entity/artifact_entity.py
+adult_income/entity/config_entity.py
 adult_income/pipeline/__init__.py
