@@ -12,7 +12,7 @@ COLLECTION_NAME="income"
 if __name__=="__main__":
     df = pd.read_csv(DATA_FILE_PATH)
     print(f"Rows and columns: {df.shape}")
-
+    
     #Convert dataframe to json so that we can dump these record in mongo db
     df.reset_index(drop=True,inplace=True)
 
