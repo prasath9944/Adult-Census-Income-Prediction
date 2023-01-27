@@ -31,6 +31,7 @@ class DataIngestion:
 
             #replace na with Nan
             df.replace(to_replace=" ?",value=np.NAN,inplace=True)
+            df=pd.get_dummies(df,drop_first=True)
 
             #Save data in feature store
             logging.info("Create feature store folder if not available")

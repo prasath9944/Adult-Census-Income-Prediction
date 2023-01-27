@@ -5,6 +5,7 @@ import sys,os
 from adult_income.entity import config_entity,artifact_entity
 from adult_income.components.data_ingestion import DataIngestion
 from adult_income.components.data_validation import DataValidation
+from adult_income.components.data_transformation import DataTransformation
 
 
 
@@ -26,6 +27,12 @@ if __name__=="__main__":
 
           data_validation_artifact = data_validation.initiate_data_validation()
           print("Data Validation Completed")
+
+          print("Data Transformation Started")
+          data_transformation_config=config_entity.DataTransformationConfig(training_pipeline_config=training_pipeline_config)
+          data_transformation=DataTransformation(data_transformation_config=data_transformation_config, data_ingestion_artifact=data_ingestion_artifact)
+          data_transformation_artifact=data_transformation.initiate_data_transformation()
+          print("Data Transformation has been completed")
 
      except Exception as e:
           IncomeException(e, sys)

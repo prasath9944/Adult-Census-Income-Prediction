@@ -113,6 +113,7 @@ class DataValidation:
             #base_df has na as null
             logging.info(f"Drop null values colums from base df")
             base_df=self.drop_missing_values_columns(df=base_df,report_key_name="missing_values_within_base_dataset")
+            base_df=pd.get_dummies(base_df,drop_first=True)
 
             logging.info(f"Reading train dataframe")
             train_df = pd.read_csv(self.data_ingestion_artifact.train_file_path)
@@ -126,9 +127,9 @@ class DataValidation:
 
             exclude_columns = [TARGET_COLUMN]
 
-            base_df=utils.fetching_numerical_features(df=base_df)
-            train_df=utils.fetching_numerical_features(df=train_df)
-            test_df=utils.fetching_numerical_features(df=test_df)
+            # base_df=utils.fetching_numerical_features(df=base_df)
+            # train_df=utils.fetching_numerical_features(df=train_df)
+            # test_df=utils.fetching_numerical_features(df=test_df)
 
             logging.info(f"Converting the numerical feature to float type")
             
