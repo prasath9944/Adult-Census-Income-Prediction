@@ -125,11 +125,11 @@ class DataValidation:
             test_df = self.drop_missing_values_columns(df=test_df,report_key_name="missing_values_within_test_dataset")
 
 
-            logging.info(f"Converting categorical feature to numercial feature for any datadrift has been occureed")
+            # logging.info(f"Converting categorical feature to numercial feature for any datadrift has been occureed")
             exclude_columns = [TARGET_COLUMN]
             base_df=utils.encode_categorical_tonumerical(df=base_df,exclude_columns=exclude_columns)
-            train_df=utils.encode_categorical_tonumerical(df=train_df,exclude_columns=exclude_columns)
-            test_df=utils.encode_categorical_tonumerical(df=test_df,exclude_columns=[])
+            # train_df=utils.encode_categorical_tonumerical(df=train_df,exclude_columns=exclude_columns)
+            # test_df=utils.encode_categorical_tonumerical(df=test_df,exclude_columns=[])
 
             logging.info(f"Converting the numerical feature to float type")
             base_df = utils.convert_columns_float(df=base_df, exclude_columns=exclude_columns)
@@ -147,16 +147,16 @@ class DataValidation:
             logging.info(f"Is all required columns present in train df")
             train_df_columns_status = self.is_required_columns_exists(base_df=base_df, current_df=train_df,report_key_name="missing_columns_within_train_dataset")
             logging.info(f"Is all required columns present in test df")
-            # test_df_columns_status = self.is_required_columns_exists(base_df=base_df, current_df=test_df,report_key_name="missing_columns_within_test_dataset")
-            # print(f"Test_df_columns_status is {test_df_columns_status}")
-            # logging.info("Checking any data-drift has occurred.")
+            test_df_columns_status = self.is_required_columns_exists(base_df=base_df, current_df=test_df,report_key_name="missing_columns_within_test_dataset")
+            print(f"Test_df_columns_status is {test_df_columns_status}")
+            logging.info("Checking any data-drift has occurred.")
 
             if train_df_columns_status:
                 logging.info(f"As all column are available in train df hence detecting data drift")
                 self.data_drift(base_df=base_df, current_df=train_df,report_key_name="data_drift_within_train_dataset")
-            # if test_df_columns_status:
-            #     logging.info(f"As all column are available in test df hence detecting data drift")
-            #     self.data_drift(base_df=base_df, current_df=test_df,report_key_name="data_drift_within_test_dataset")
+            if test_df_columns_status:
+                logging.info(f"As all column are available in test df hence detecting data drift")
+                self.data_drift(base_df=base_df, current_df=test_df,report_key_name="data_drift_within_test_dataset")
 
             #write the report
             logging.info("Write reprt in yaml file")

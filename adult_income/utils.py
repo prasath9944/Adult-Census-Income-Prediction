@@ -43,6 +43,7 @@ def write_yaml_file(file_path,data:dict):
 
 def convert_columns_float(df:pd.DataFrame,exclude_columns:list)->pd.DataFrame:
     try:
+        logging.info(f"Convarting the Features to float type")
         for column in df.columns:
             if column not in exclude_columns:
                 df[column]=df[column].astype('float')
