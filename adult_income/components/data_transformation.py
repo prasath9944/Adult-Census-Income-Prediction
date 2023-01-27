@@ -25,7 +25,7 @@ class DataTransformation:
             self.data_transformation_config=data_transformation_config
             self.data_ingestion_artifact=data_ingestion_artifact
         except Exception as e:
-            raise SensorException(e, sys)
+            raise IncomeException(e, sys)
 
 
     @classmethod

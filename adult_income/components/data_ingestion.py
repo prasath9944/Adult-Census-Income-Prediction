@@ -32,10 +32,6 @@ class DataIngestion:
             #replace na with Nan
             df.replace(to_replace=" ?",value=np.NAN,inplace=True)
 
-            logging.info(f"Converting categorical feature to numercial feature")
-            exclude_columns = [TARGET_COLUMN]
-            df=utils.encode_categorical_tonumerical(df=df,exclude_columns=exclude_columns)
-
             #Save data in feature store
             logging.info("Create feature store folder if not available")
             #Create feature store folder if not available

@@ -124,14 +124,14 @@ class DataValidation:
             logging.info(f"Drop null values colums from test df")
             test_df = self.drop_missing_values_columns(df=test_df,report_key_name="missing_values_within_test_dataset")
 
-
-            # logging.info(f"Converting categorical feature to numercial feature for any datadrift has been occureed")
             exclude_columns = [TARGET_COLUMN]
-            base_df=utils.encode_categorical_tonumerical(df=base_df,exclude_columns=exclude_columns)
-            # train_df=utils.encode_categorical_tonumerical(df=train_df,exclude_columns=exclude_columns)
-            # test_df=utils.encode_categorical_tonumerical(df=test_df,exclude_columns=[])
+
+            base_df=utils.fetching_numerical_features(df=base_df)
+            train_df=utils.fetching_numerical_features(df=train_df)
+            test_df=utils.fetching_numerical_features(df=test_df)
 
             logging.info(f"Converting the numerical feature to float type")
+            
             base_df = utils.convert_columns_float(df=base_df, exclude_columns=exclude_columns)
             train_df = utils.convert_columns_float(df=train_df, exclude_columns=exclude_columns)
             test_df = utils.convert_columns_float(df=test_df, exclude_columns=exclude_columns)
@@ -148,8 +148,12 @@ class DataValidation:
             train_df_columns_status = self.is_required_columns_exists(base_df=base_df, current_df=train_df,report_key_name="missing_columns_within_train_dataset")
             logging.info(f"Is all required columns present in test df")
             test_df_columns_status = self.is_required_columns_exists(base_df=base_df, current_df=test_df,report_key_name="missing_columns_within_test_dataset")
-            print(f"Test_df_columns_status is {test_df_columns_status}")
+
             logging.info("Checking any data-drift has occurred.")
+            logging.info(f"Base_df shape: {base_df.shape}")
+            logging.info(f"train_df shape: {train_df.shape}")
+            logging.info(f"test_df shape: {test_df.shape}")
+
 
             if train_df_columns_status:
                 logging.info(f"As all column are available in train df hence detecting data drift")

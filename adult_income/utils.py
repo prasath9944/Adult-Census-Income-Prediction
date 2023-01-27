@@ -59,3 +59,10 @@ def encode_categorical_tonumerical(df:pd.DataFrame,exclude_columns:list)->pd.Dat
         return data
     except Exception as e:
         raise IncomeException(e, sys)
+
+def fetching_numerical_features(df:pd.DataFrame)->pd.DataFrame:
+    try:
+        numerical_columns=[i for i in df.columns if df[i].dtype!='O']
+        return df[numerical_columns]
+    except Exception as e:
+        raise IncomeException(e, sys)
