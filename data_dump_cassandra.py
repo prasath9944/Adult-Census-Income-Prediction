@@ -2,14 +2,16 @@ import pandas as pd
 import json
 import csv
 import os
-from adult_income.config import session
+from cassandra.cluster import Cluster
+from cassandra.auth import PlainTextAuthProvider
 
-# cloud_config= {
-#          'secure_connect_bundle': 'secure-connect-adult-census-income.zip'
-# }
-# auth_provider = PlainTextAuthProvider('YZWGgDNGqgigHftDxrKugMRZ', 'boChdpRPzaig.mkfk+5+Pg7m2kDTpv-,AjBX.W016s6+SDDLT-xh632tlIJ_RUNZv+EiW94JPs2fnsif6TylLkqxemCtnHZrfDeFmiem77TbLq+LymIYeX.ay_wTKBJq')
-# cluster = Cluster(cloud=cloud_config, auth_provider=auth_provider)
-# session = cluster.connect()
+
+cloud_config= {
+         'secure_connect_bundle': 'secure-connect-adult-census-income.zip'
+}
+auth_provider = PlainTextAuthProvider('YZWGgDNGqgigHftDxrKugMRZ', 'boChdpRPzaig.mkfk+5+Pg7m2kDTpv-,AjBX.W016s6+SDDLT-xh632tlIJ_RUNZv+EiW94JPs2fnsif6TylLkqxemCtnHZrfDeFmiem77TbLq+LymIYeX.ay_wTKBJq')
+cluster = Cluster(cloud=cloud_config, auth_provider=auth_provider)
+session = cluster.connect()
 
 DATA_FILE_PATH="sample_adult.csv"
 KEYSPACE_NAME="adult"
