@@ -1,4 +1,3 @@
-
 from adult_income import utils
 from adult_income.entity import config_entity
 from adult_income.entity import artifact_entity
@@ -69,7 +68,3 @@ class DataIngestion:
 
         except Exception as e:
             raise IncomeException(error_message=e, error_detail=sys)
-
-
-
-        

@@ -9,6 +9,7 @@ adult_income/__init__.py
 adult_income/config.py
 adult_income/exception.py
 adult_income/logger.py
+adult_income/predictor.py
 adult_income/utils.py
 adult_income/components/__init__.py
 adult_income/components/data_ingestion.py

@@ -7,6 +7,7 @@ from adult_income.components.data_ingestion import DataIngestion
 from adult_income.components.data_validation import DataValidation
 from adult_income.components.data_transformation import DataTransformation
 from adult_income.components.model_trainer import ModelTrainer
+from adult_income.components.model_evaluation import ModelEvaluation
 
 
 
@@ -40,6 +41,12 @@ if __name__=="__main__":
           model_trainer=ModelTrainer(model_trainer_config=model_trainer_config, data_transformation_artifact=data_transformation_artifact)
           model_trainer_artifact=model_trainer.initiate_model_trainer()
           print("Model Trainer Completed")
+
+          print("Model Evaluation Started")
+          model_evaluation_config=config_entity.ModelEvaluationConfig(training_pipeline_config=training_pipeline_config)
+          model_evaluation=ModelEvaluation(model_eval_config=model_evaluation_config, data_ingestion_artifact=data_ingestion_artifact, data_transformation_artifact=data_transformation_artifact, model_trainer_artifact=model_trainer_artifact)
+          model_evaluation_artifact=model_evaluation.initiate_model_evaluation()
+          print(f"{model_evaluation_artifact}")
 
      except Exception as e:
           IncomeException(e, sys)

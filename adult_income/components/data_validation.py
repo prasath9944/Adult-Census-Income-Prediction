@@ -31,7 +31,6 @@ class DataValidation:
     def drop_missing_values_columns(self,df:pd.DataFrame,report_key_name:str)->Optional[pd.DataFrame]:
         """
         This function will drop column which contains missing value more than specified threshold
-
         df: Accepts a pandas dataframe
         threshold: Percentage criteria to drop a column
         =====================================================================================
@@ -172,4 +171,3 @@ class DataValidation:
             return data_validation_artifact
         except Exception as e:
             raise SensorException(e, sys)
-
