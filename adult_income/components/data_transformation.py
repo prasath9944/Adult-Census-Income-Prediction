@@ -31,7 +31,7 @@ class DataTransformation:
     @classmethod
     def get_data_transformer_object(cls)->Pipeline:
         try:
-            logging.info(f"Simple Imputer with median strategy")
+            logging.info(f"Simple Imputer with Constant strategy")
             simple_imputer = SimpleImputer(strategy='constant', fill_value=0)
             robust_scaler =  RobustScaler()
             pipeline = Pipeline(steps=[
@@ -56,7 +56,22 @@ class DataTransformation:
             input_feature_train_df=train_df.drop(TARGET_COLUMN,axis=1)
             input_feature_test_df=test_df.drop(TARGET_COLUMN,axis=1)
 
-            logging.info("Onehot Encoding the Categorical Features")
+
+            logging.info("Label Encoding the Categorical Features")
+            categorical_features=[feature for feature in input_feature_train_df if input_feature_train_df[feature].dtype=='O']
+            logging.info(f"Categorical Features in input_feature_train_df: {categorical_features}")
+
+            input_feature_train_df=utils.convert_categorical_toNumerical(df=input_feature_train_df, categorical_features=categorical_features)
+            input_feature_test_df=utils.convert_categorical_toNumerical(df=input_feature_test_df, categorical_features=categorical_features)
+            
+            logging.info(f"input_feature_train_df shape: {input_feature_train_df.head(1)}")
+            logging.info(f"input_feature_test_df shape: {input_feature_train_df.head(1)}")
+            # for feature in categorical_features:
+            #     encoder=LabelEncoder()
+            #     input_feature_train_df[feature]=encoder.fit_transform(input_feature_train_df[feature])
+            #     input_feature_test_df[feature]=encoder.transform(input_feature_test_df[feature])
+
+
 
             logging.info(f"selecting target feature for train and test dataframe")
             #selecting target feature for train and test dataframe
@@ -65,7 +80,10 @@ class DataTransformation:
             target_feature_test_df = test_df[TARGET_COLUMN]
 
             label_encoder = LabelEncoder()
-            label_encoder.fit(target_feature_train_df)
+            target_feature_train_df=label_encoder.fit_transform(target_feature_train_df)
+            target_feature_test_df=label_encoder.transform(target_feature_test_df)
+
+            
 
             #transformation on target columns
             logging.info(f"transformation on target columns")
@@ -77,11 +95,11 @@ class DataTransformation:
             transformation_pipleine.fit(input_feature_train_df)
 
             #transforming input features
-            logging.info("transforming input features")
+            logging.info(f"transforming input features")
             input_feature_train_arr = transformation_pipleine.transform(input_feature_train_df)
-            logging.info(f"Transoformed the input_train_arr")
+            logging.info(f"Transformed the input_train_arr")
             input_feature_test_arr = transformation_pipleine.transform(input_feature_test_df)
-            logging.info(f"Transoformed the input_test_arr")
+            logging.info(f"Transformed the input_test_arr")
 
             logging.info(f"target_feature_train_arr shape: {target_feature_train_arr.shape}")
             logging.info(f"target_feature_test_arr shape: {target_feature_test_arr.shape}")
@@ -89,7 +107,7 @@ class DataTransformation:
 
             
             logging.info(f"Before resampling in training set Input: {input_feature_train_arr.shape} Target:{target_feature_train_arr.shape}")
-            smt = SMOTETomek(sampling_strategy="minority")
+            smt = SMOTETomek(random_state=42)
             input_feature_train_arr, target_feature_train_arr = smt.fit_resample(input_feature_train_arr, target_feature_train_arr)
             logging.info(f"After resampling in training set Input: {input_feature_train_arr.shape} Target:{target_feature_train_arr.shape}")
             
@@ -102,7 +120,8 @@ class DataTransformation:
             train_arr = np.c_[input_feature_train_arr, target_feature_train_arr ]
             test_arr = np.c_[input_feature_test_arr, target_feature_test_arr]
 
-
+            logging.info(f"train arr : {train_arr[1]}")
+            logging.info(f"test arr : {test_arr[1]}")
             #save numpy array
             logging.info(f"save transformed train array")
             utils.save_numpy_array_data(file_path=self.data_transformation_config.transformed_train_path,
@@ -119,6 +138,7 @@ class DataTransformation:
             logging.info(f"saving the target encoder object")
             utils.save_object(file_path=self.data_transformation_config.target_encoder_path,
              obj=label_encoder)
+             
 
 
             logging.info(f"Data Transformation artifact")
@@ -126,8 +146,7 @@ class DataTransformation:
                 transform_object_path=self.data_transformation_config.transform_object_path,
                 transformed_train_path = self.data_transformation_config.transformed_train_path,
                 transformed_test_path = self.data_transformation_config.transformed_test_path,
-                target_encoder_path = self.data_transformation_config.target_encoder_path
-
+                target_encoder_path = self.data_transformation_config.target_encoder_path,
             )
 
             logging.info(f"Data transformation object {data_transformation_artifact}")

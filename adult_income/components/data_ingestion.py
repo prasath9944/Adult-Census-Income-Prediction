@@ -30,7 +30,7 @@ class DataIngestion:
 
             #replace na with Nan
             df.replace(to_replace=" ?",value=np.NAN,inplace=True)
-            df=pd.get_dummies(df,drop_first=True)
+            # df=pd.get_dummies(df,drop_first=True)
 
             #Save data in feature store
             logging.info("Create feature store folder if not available")
@@ -44,7 +44,7 @@ class DataIngestion:
 
             logging.info("split dataset into train and test set")
             #split dataset into train and test set
-            train_df,test_df = train_test_split(df,test_size=self.data_ingestion_config.test_size)
+            train_df,test_df = train_test_split(df,test_size=self.data_ingestion_config.test_size,random_state=42)
             
             logging.info("create dataset directory folder if not available")
             #create dataset directory folder if not available

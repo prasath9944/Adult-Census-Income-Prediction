@@ -45,7 +45,7 @@ def convert_columns_float(df:pd.DataFrame,exclude_columns:list)->pd.DataFrame:
     try:
         logging.info(f"Converting the Features to float type")
         for column in df.columns:
-            if column not in exclude_columns:
+            if column not in exclude_columns and df[column].dtype!='O':
                 df[column]=df[column].astype('float')
         return df
     except Exception as e:
@@ -93,7 +93,23 @@ def load_numpy_array_data(file_path: str) -> np.array:
     return: np.array data loaded
     """
     try:
+        logging.info(f"Loading the numpy array: {file_path}")
         with open(file_path, "rb") as file_obj:
             return np.load(file_obj)
     except Exception as e:
         raise IncomeException(e, sys) from e
+
+def convert_categorical_toNumerical(df:pd.DataFrame,categorical_features:list)->pd.DataFrame:
+    try:
+        count=0
+        for feature in categorical_features:
+            temp=len(list(df[feature].value_counts().index))
+            ls=list(df[feature].value_counts().index)
+            for i in range(temp):
+                df[feature]=df[feature].replace(ls[i],count)
+                count+=1
+            count=0
+        return df
+
+    except Exception as e:
+        raise IncomeException(e, sys)

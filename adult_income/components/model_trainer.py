@@ -44,7 +44,9 @@ class ModelTrainer:
         try:
             logging.info(f"Loading train and test array.")
             train_arr = utils.load_numpy_array_data(file_path=self.data_transformation_artifact.transformed_train_path)
+            logging.info(f"Train_arr shaps:{train_arr.shape}")
             test_arr = utils.load_numpy_array_data(file_path=self.data_transformation_artifact.transformed_test_path)
+            logging.info(f"test arr shape :{test_arr.shape}")
 
             logging.info(f"Splitting input and target feature from both train and test arr.")
             x_train,y_train = train_arr[:,:-1],train_arr[:,-1]
@@ -80,8 +82,7 @@ class ModelTrainer:
 
             #prepare artifact
             logging.info(f"Prepare the artifact")
-            model_trainer_artifact  = artifact_entity.ModelTrainerArtifact(model_path=self.model_trainer_config.model_path, 
-            f1_train_score=f1_train_score, f1_test_score=f1_test_score)
+            model_trainer_artifact  = artifact_entity.ModelTrainerArtifact(model_path=self.model_trainer_config.model_path,f1_train_score=f1_train_score, f1_test_score=f1_test_score)
             logging.info(f"Model trainer artifact: {model_trainer_artifact}")
             return model_trainer_artifact
         except Exception as e:

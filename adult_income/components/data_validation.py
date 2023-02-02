@@ -70,14 +70,15 @@ class DataValidation:
                 return False
             return True
         except Exception as e:
-            raise SensorException(e, sys)
+            raise IncomeException(e, sys)
 
     def data_drift(self,base_df:pd.DataFrame,current_df:pd.DataFrame,report_key_name:str):
         try:
             drift_report=dict()
-
-            base_columns = base_df.columns
-            current_columns = current_df.columns
+            base_col=[feature for feature in base_df.columns if base_df[feature].dtype!='O']
+            current_col=[feature for feature in base_df.columns if base_df[feature].dtype!='O']
+            base_columns = base_col
+            current_columns = current_col
 
             for base_column in base_columns:
                 base_data,current_data = base_df[base_column],current_df[base_column]
@@ -101,7 +102,7 @@ class DataValidation:
 
             self.validation_error[report_key_name]=drift_report
         except Exception as e:
-            raise SensorException(e, sys)
+            raise IncomeException(e, sys)
 
     def initiate_data_validation(self)->artifact_entity.DataValidationArtifact:
         try:
@@ -112,7 +113,7 @@ class DataValidation:
             #base_df has na as null
             logging.info(f"Drop null values colums from base df")
             base_df=self.drop_missing_values_columns(df=base_df,report_key_name="missing_values_within_base_dataset")
-            base_df=pd.get_dummies(base_df,drop_first=True)
+            # base_df=pd.get_dummies(base_df,drop_first=True)
 
             logging.info(f"Reading train dataframe")
             train_df = pd.read_csv(self.data_ingestion_artifact.train_file_path)
@@ -125,10 +126,6 @@ class DataValidation:
             test_df = self.drop_missing_values_columns(df=test_df,report_key_name="missing_values_within_test_dataset")
 
             exclude_columns = [TARGET_COLUMN]
-
-            # base_df=utils.fetching_numerical_features(df=base_df)
-            # train_df=utils.fetching_numerical_features(df=train_df)
-            # test_df=utils.fetching_numerical_features(df=test_df)
 
             logging.info(f"Converting the numerical feature to float type")
             
@@ -170,4 +167,4 @@ class DataValidation:
             logging.info(f"Data validation artifact: {data_validation_artifact}")
             return data_validation_artifact
         except Exception as e:
-            raise SensorException(e, sys)
+            raise IncomeException(e, sys)

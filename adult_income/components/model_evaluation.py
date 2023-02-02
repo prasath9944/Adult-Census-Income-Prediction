@@ -4,8 +4,10 @@ from adult_income.exception import IncomeException
 from adult_income.logger import logging
 from adult_income.utils import load_object
 from sklearn.metrics import f1_score
+from sklearn.preprocessing import LabelEncoder
 import pandas  as pd
 import sys,os
+from adult_income import utils
 from adult_income.config import TARGET_COLUMN
 class ModelEvaluation:
 
@@ -55,6 +57,7 @@ class ModelEvaluation:
             transformer = load_object(file_path=transformer_path)
             model = load_object(file_path=model_path)
             target_encoder = load_object(file_path=target_encoder_path)
+
             
 
             logging.info("Currently trained model objects")
@@ -62,17 +65,31 @@ class ModelEvaluation:
             current_transformer = load_object(file_path=self.data_transformation_artifact.transform_object_path)
             current_model  = load_object(file_path=self.model_trainer_artifact.model_path)
             current_target_encoder = load_object(file_path=self.data_transformation_artifact.target_encoder_path)
+
             
 
 
             test_df = pd.read_csv(self.data_ingestion_artifact.test_file_path)
+            logging.info(f"test_df Columns: {test_df.columns}")
             target_df = test_df[TARGET_COLUMN]
             y_true=target_df
-            # y_true =target_encoder.transform(target_df)
+            y_true =target_encoder.transform(target_df)
             # accuracy using previous trained model
             
             input_feature_name = list(transformer.feature_names_in_)
-            input_arr =transformer.transform(test_df[input_feature_name])
+            test_df=test_df[input_feature_name]
+            logging.info(f"Transformed feature name are {input_feature_name}")
+
+            categorical_features=[feature for feature in test_df if test_df[feature].dtype=='O']
+            logging.info(f"Categorical feature in test_df:{categorical_features}")
+
+            test_df=utils.convert_categorical_toNumerical(df=test_df, categorical_features=categorical_features)
+
+            # for feature in categorical_features:
+            #     encoder=LabelEncoder()
+            #     test_df[feature]=encoder.fit_transform(test_df[feature])
+                
+            input_arr =transformer.transform(test_df)
             y_pred = model.predict(input_arr)
             print(f"Prediction using previous model: {target_encoder.inverse_transform(y_pred[:5])}")
             previous_model_score = f1_score(y_true=y_true, y_pred=y_pred)
