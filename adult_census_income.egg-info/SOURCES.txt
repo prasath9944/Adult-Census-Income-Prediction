@@ -22,3 +22,5 @@ adult_income/entity/__init__.py
 adult_income/entity/artifact_entity.py
 adult_income/entity/config_entity.py
 adult_income/pipeline/__init__.py
+adult_income/pipeline/batch_prediction.py
+adult_income/pipeline/training_pipeline.py
