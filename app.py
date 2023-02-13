@@ -18,6 +18,7 @@ target_encoder_file_path=resolver.get_latest_target_encoder_path()
 transformed=pickle.load(open(transformer_file_path,'rb'))
 model=pickle.load(open(model_file_path,'rb'))
 scalar=pickle.load(open(target_encoder_file_path,'rb'))
+temp=False
 
 app=Flask(__name__)
 
@@ -64,6 +65,5 @@ def predict():
         raise IncomeException(e,sys)
 
 
-if __name__=="__main__":
-    temp=False
+if __name__=="__main__":  
     app.run(debug=True)
