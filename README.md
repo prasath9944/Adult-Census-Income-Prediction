@@ -35,4 +35,8 @@ learning algorithms that’s best fit for the above case.
 
 
 <h2>Dataset:</h2>
+<<<<<<< HEAD
 Dataset Link :- <a href="https://www.kaggle.com/datasets/overload10/adult-census-dataset">Dataset</a>
+=======
+Dataset Link :- <a href="https://www.kaggle.com/datasets/overload10/adult-census-dataset">Dataset</a>
+>>>>>>> 2d0ed22c7d378e50c3a64c2abbd3c85438e0a94f
