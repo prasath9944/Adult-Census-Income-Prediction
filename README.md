@@ -1,15 +1,42 @@
-# neurolab-mongo-python
+<h1>Adult Census Income Prediction</h1>
 
-![image](https://user-images.githubusercontent.com/57321948/196933065-4b16c235-f3b9-4391-9cfe-4affcec87c35.png)
+<br>
+<table>
+  <tr>
+    <th>Project Title</th>
+    <td>Adult Census Income Prediction</th>
+  </tr>
+  <tr>
+    <th>Technologies</th>
+    <td>Machine Learning Technology</td>
+  </tr>
+  <tr>
+    <th>Domain</th>
+    <td>Finance</td>
+  </tr>
+    <tr>
+    <th>Project Difficulties level</th>
+    <td>Intermediate</td>
+  </tr>
+</table>
 
-### Step 1 - Install the requirements
+<br>
+<hr>
+<br>
+<h2>Problem Statement</h2>
+<p>The Goal is to predict whether a person has an income of more than 50K a year or not.
+This is basically a binary classification problem where a person is classified into the
+>50K group or <=50K group.</p>
+<br>
 
-```bash
-pip install -r requirements.txt
-```
+<h2>Approach:</h2> The classical machine learning tasks like Data Exploration, Data Cleaning,
+Feature Engineering, Model Building and Model Testing. Try out different machine
+learning algorithms that’s best fit for the above case.
 
-### Step 2 - Run main.py file
 
-```bash
-python main.py
-```
+<h2>Dataset:</h2>
+<<<<<<< HEAD
+Dataset Link :- <a href="https://www.kaggle.com/datasets/overload10/adult-census-dataset">Dataset</a>
+=======
+Dataset Link :- <a href="https://www.kaggle.com/datasets/overload10/adult-census-dataset">Dataset</a>
+>>>>>>> 2d0ed22c7d378e50c3a64c2abbd3c85438e0a94f

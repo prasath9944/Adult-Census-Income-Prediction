@@ -66,10 +66,6 @@ class DataTransformation:
             
             logging.info(f"input_feature_train_df shape: {input_feature_train_df.head(1)}")
             logging.info(f"input_feature_test_df shape: {input_feature_train_df.head(1)}")
-            # for feature in categorical_features:
-            #     encoder=LabelEncoder()
-            #     input_feature_train_df[feature]=encoder.fit_transform(input_feature_train_df[feature])
-            #     input_feature_test_df[feature]=encoder.transform(input_feature_test_df[feature])
 
 
 
