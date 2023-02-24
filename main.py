@@ -6,8 +6,7 @@ import os,sys
 file_path="sample_adult.csv"
 if __name__=="__main__":
      try:
-          # start_training_pipeline()
-          output_file = start_batch_prediction(input_file_path=file_path)
-          print(output_file)
+          start_training_pipeline()
+          # output_file = start_batch_prediction(input_file_path=file_path)
      except Exception as e:
           IncomeException(e, sys)

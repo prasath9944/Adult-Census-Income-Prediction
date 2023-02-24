@@ -7,9 +7,11 @@ from adult_income.predictor import ModelResolver
 from adult_income.utils import convert_categorical_toNumerical
 from adult_income.config import TARGET_COLUMN
 from adult_income.logger import logging
+from adult_income.pipeline.training_pipeline import start_training_pipeline
 import os,sys
 from adult_income.exception import IncomeException
 
+start_training_pipeline()
 resolver=ModelResolver()
 transformer_file_path=resolver.get_latest_transformer_path()
 model_file_path=resolver.get_latest_model_path()
