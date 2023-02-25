@@ -22,94 +22,91 @@
 
 
       <form action="{{ url_for('predict')}}" method="post">
+        <div class="form-row">
 
-        <div class="form-group">
-          <label for="Age" class="label">Age</label>
-          <input type="number" class="form-control" id="Age" aria-describedby="Age" name="Age" placeholder="Enter Your Age" required>
-          <small id="Age" class="form-text text-muted">We'll never share your age with anyone else.</small>
+            <div class="form-group col-md-6">
+              <label for="Age" class="label">Age</label>
+              <input type="number" class="form-control" id="Age" name="Age" placeholder="Enter Your Age" required>
+            </div>
+          
+            <div class="form-group col-md-6">
+              <label for="workclass" class="label">Work Class</label>
+              <input type="text" class="form-control" id="workclass" name="workclass" placeholder="Enter Your Work Class" required>
+            </div>
         </div>
       
-        <div class="form-group">
-          <label for="workclass" class="label">Work Class</label>
-          <input type="text" class="form-control" id="workclass" name="workclass" placeholder="Enter Your Work Class" required>
-        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="fnlwgt" class="label">fnlwgt</label>
+            <input type="number" class="form-control" id="fnlwgt" name="fnlwgt" placeholder="Enter Your fnlwgt" required>
+          </div>
+        
+          <div class="form-group col-md-6">
+            <label for="education" class="label">education</label>
+            <input type="text" class="form-control" id="education" name="education" placeholder="Enter Your education" required>
+          </div>
+        <div>
       
-        <div class="form-group">
-          <label for="fnlwgt" class="label">fnlwgt</label>
-          <input type="number" class="form-control" id="fnlwgt" name="fnlwgt" placeholder="Enter Your fnlwgt" required>
-        </div>
-      
-        <div class="form-group">
-          <label for="education" class="label">education</label>
-          <input type="text" class="form-control" id="education" name="education" placeholder="Enter Your education" required>
-        </div>
-      
-        <div class="form-group">
+        <div class="form-group col-md-6">
           <label for="education-num" class="label">education-num</label>
           <input type="number" class="form-control" id="education-num" name="education-num" placeholder="Enter Your education-num" required>
         </div>
       
-        <div class="form-group">
+        <div class="form-group col-md-6">
           <label for="marital-status" class="label">marital-status</label>
           <input type="text" class="form-control" id="marital-status" name="marital-status" placeholder="Enter Your marital-status" required>
         </div>
       
-        <div class="form-group">
+        <div class="form-group col-md-6">
           <label for="occupation" class="label">occupation</label>
           <input type="text" class="form-control" id="occupation" name="occupation" placeholder="Enter Your occupation" required>
         </div>
       
-        <div class="form-group">
+        <div class="form-group col-md-6">
           <label for="relationship" class="label">relationship</label>
           <input type="text" class="form-control" id="relationship" name="relationship" placeholder="Enter Your relationship" required>
         </div>
       
-        <div class="form-group">
+        <div class="form-group col-md-6">
           <label for="race" class="label">race</label>
           <input type="text" class="form-control" id="race" name="race" placeholder="Enter Your race" required>
         </div>
       
-        <div class="form-group">
+        <div class="form-group col-md-6">
           <label for="sex" class="label">sex</label>
           <input type="text" class="form-control" id="sex" name="sex" placeholder="Enter Your Gender" required>
         </div>
       
-        <div class="form-group">
+        <div class="form-group col-md-6">
           <label for="capital-gain" class="label">capital-gain</label>
           <input type="number" class="form-control" id="capital-gain" name="capital-gain" placeholder="Enter Your capital-gain" required>
         </div>
       
-        <div class="form-group">
+        <div class="form-group col-md-6">
           <label for="capital-loss" class="label">capital-loss</label>
           <input type="number" class="form-control" id="capital-loss" name="capital-loss" placeholder="Enter Your capital-loss" required>
         </div>
       
-        <div class="form-group">
+        <div class="form-group col-md-6">
           <label for="hours-per-week" class="label">hours-per-week</label>
           <input type="number" class="form-control" id="hours-per-week" name="hours-per-week" placeholder="Enter Your hours-per-week" required>
         </div>
       
-        <div class="form-group">
+        <div class="form-group col-md-6">
           <label for="country" class="label">country</label>
           <input type="text" class="form-control" id="country" name="country" placeholder="Enter Your country" required>
         </div>
         <br>
       
-        <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+        <button type="submit" class="btn btn-primary btn-lg">Predict</button>
       </form>
 
     </div>
-    <div class='col'>
-      <br>
-      <br>
-      <img src="https://www.theladders.com/wp-content/uploads/income-money-change-salary-raise.jpg" width=100%>
-      <br>
-      <br>
-      <h1>{{prediction_text}}</h1>
-    </div>
+   
     
   </div>
 </div>
+
 
   
  

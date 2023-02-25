@@ -26,7 +26,8 @@ def training_pipeline():
 
     
     
-@app.route('/')
+@app.route('/',methods=['GET', 'POST'])
+@app.route('/home',methods=['GET', 'POST'])
 def home():   
     logging.info(f"Rendering the Home Page")
     return render_template("home.html")
@@ -71,10 +72,10 @@ def predict():
         actual_value=scalar.inverse_transform(predicted_value)
         logging.info(f"Inverse transfroming the predicted values: {predicted_value} actual values: {actual_value}")
         final_input=actual_value[0]
-        return render_template("home.html",prediction_text="The Salary of the Employee predicted is {}".format(final_input))
+        return render_template("output.html",prediction_text="The Salary of the Employee predicted is {}".format(final_input))
     except Exception as e:
         raise IncomeException(e,sys)
 
 
 if __name__=="__main__":  
-    app.run(port=8080,debug=False)
+    app.run(port=8080,debug=False,host='0.0.0.0')
