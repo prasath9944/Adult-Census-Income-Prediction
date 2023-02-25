@@ -10,7 +10,7 @@ from adult_income.components.model_evaluation import ModelEvaluation
 from adult_income.components.model_pusher import ModelPusher
 
 
-def start_training_pipeline():
+def start_training_pipeline()->bool:
     try:
         logging.info("Training Pipeline Started")
         training_pipeline_config = config_entity.TrainingPipelineConfig()
@@ -68,5 +68,6 @@ def start_training_pipeline():
         model_pusher_artifact = model_pusher.initiate_model_pusher()
         logging.info("Model Pusher Ended")
         logging.info("Training Pipeline Ended")
+        return True
     except Exception as e:
         raise IncomeException(e, sys)

@@ -1,6 +1,6 @@
 import json
 import pickle
-from flask import Flask,request,app,jsonify,url_for,render_template
+from flask import Flask, redirect,request,app,url_for,render_template
 import numpy as np
 import pandas as pd
 from adult_income.predictor import ModelResolver
@@ -10,23 +10,24 @@ from adult_income.logger import logging
 from adult_income.pipeline.training_pipeline import start_training_pipeline
 import os,sys
 from adult_income.exception import IncomeException
-
-start_training_pipeline()
 resolver=ModelResolver()
-transformer_file_path=resolver.get_latest_transformer_path()
-model_file_path=resolver.get_latest_model_path()
-target_encoder_file_path=resolver.get_latest_target_encoder_path()
 
-transformed=pickle.load(open(transformer_file_path,'rb'))
-model=pickle.load(open(model_file_path,'rb'))
-scalar=pickle.load(open(target_encoder_file_path,'rb'))
+
+
 temp=False
-
 app=Flask(__name__)
 
+@app.route('/trainingpipeline')
+def training_pipeline():
+    if start_training_pipeline()==True:
+        return redirect('/')
+    else:
+        return NotImplementedError
 
+    
+    
 @app.route('/')
-def home():
+def home():   
     logging.info(f"Rendering the Home Page")
     return render_template("home.html")
 
@@ -34,6 +35,14 @@ def home():
 @app.route('/predict',methods=['POST'])
 def predict():
     try:
+        transformer_file_path=resolver.get_latest_transformer_path()
+        model_file_path=resolver.get_latest_model_path()
+        target_encoder_file_path=resolver.get_latest_target_encoder_path()
+
+        transformed=pickle.load(open(transformer_file_path,'rb'))
+        model=pickle.load(open(model_file_path,'rb'))
+        scalar=pickle.load(open(target_encoder_file_path,'rb'))
+
         cat=[]
         col=[]
         for x in request.form.items():
