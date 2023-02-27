@@ -79,12 +79,12 @@ We use all three sets of controls in our weighting program and "rake" through th
 ## Screenshots
 #### Home Page
 
-![HomePage1](Images\homepage.jpg)
+![HomePage1](https://github.com/prasath9944/Adult-Census-Income-Prediction/blob/main/Images/homepage.jpg)
 
-![Home Page1](Images\homepage2.jpg)
+![Home Page1](https://github.com/prasath9944/Adult-Census-Income-Prediction/blob/main/Images/homepage2.jpg)
 #### Predict Page
 
-![Predict Page](Images\predictpage.jpg)
+![Predict Page](https://github.com/prasath9944/Adult-Census-Income-Prediction/blob/main/Images/predictpage.jpg)
 
 
 
@@ -151,7 +151,7 @@ To deploy this project run
 
 ## Demo
 
-![Demo](Images\CensusIncome.gif)
+![Demo](https://github.com/prasath9944/Adult-Census-Income-Prediction/blob/main/Images/CensusIncome.gif)
 
 ## 🚀 About Me
 - 👋 Hi, I’m Prasath K Working as a Full Stack Dotnet Developer in @Cognizant at Chennai,India.
