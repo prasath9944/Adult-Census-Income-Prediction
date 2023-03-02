@@ -159,13 +159,13 @@ To deploy this project run
 
 ## Documentation
 
-[High Level Documentation](https://drive.google.com/drive/folders/1tUBllGNK44z3sy-Go8-PRgRjF_djLjir)
+[High Level Documentation](https://drive.google.com/file/d/1uC4fs9zwxVYBClrD_PGOhxObtoJY3sMg/view?usp=share_link)
 
-[Low Level Documentation](https://drive.google.com/drive/folders/1tUBllGNK44z3sy-Go8-PRgRjF_djLjir)
+[Low Level Documentation](https://drive.google.com/file/d/1X7C4zIrDjPkzEH8qGZ-GNcGT0xgyVYNa/view?usp=share_link)
 
-[Architecture](https://drive.google.com/drive/folders/1tUBllGNK44z3sy-Go8-PRgRjF_djLjir)
+[Architecture](https://drive.google.com/file/d/1RgCREk3WMmwmBZU4P7ZtlnsTCYxWDvLg/view?usp=share_link)
 
-[Wireframe](https://drive.google.com/drive/folders/1tUBllGNK44z3sy-Go8-PRgRjF_djLjir)
+[Wireframe](https://drive.google.com/file/d/1k4cLGJHreGB4kgxeU5GeXbHbPLz3iGq0/view?usp=share_link)
 
 
 
