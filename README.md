@@ -94,11 +94,18 @@ We use all three sets of controls in our weighting program and "rake" through th
 
 To run Application, run the following command
 
+#### To start the trainingpipeline
 ```bash
-  pip install -r requirements.txt
+  /trainingpipeline
 ```
+#### Home page
 ```bash
-  python app.py
+  /home
+```
+#### Run Locallu
+```bash
+pip install -r requirements.txt
+python app.py
 ```
 
 ## Deployment
@@ -148,6 +155,18 @@ To deploy this project run
 **Client:** Html,Css,Bootstrap
 
 **Server:** Python, Flask
+
+
+## Documentation
+
+[High Level Documentation](https://drive.google.com/drive/folders/1tUBllGNK44z3sy-Go8-PRgRjF_djLjir)
+
+[Low Level Documentation](https://drive.google.com/drive/folders/1tUBllGNK44z3sy-Go8-PRgRjF_djLjir)
+
+[Architecture](https://drive.google.com/drive/folders/1tUBllGNK44z3sy-Go8-PRgRjF_djLjir)
+
+[Wireframe](https://drive.google.com/drive/folders/1tUBllGNK44z3sy-Go8-PRgRjF_djLjir)
+
 
 
 ## Demo
