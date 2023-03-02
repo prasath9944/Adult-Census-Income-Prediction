@@ -34,6 +34,7 @@ The Goal is to predict whether a person has an income of more than 50K a year or
  - [pandas](https://pandas.pydata.org/docs/)
  - [numpy](https://numpy.org/doc/)
  - [Scaling Up the Accuracy of Naive-Bayes Classifiers: a Decision-Tree Hybrid](http://robotics.stanford.edu/~ronnyk/nbtree.pdf)
+ - [Adult Census Income Level Prediction](https://ieeexplore.ieee.org/abstract/document/8748528)
  
 
 
